@@ -5,53 +5,73 @@
 
 /**
  * _atoi - convert string to an integer
- * @str: string
+ * @str: string to convert
  *
- * Return: integer
+ * Return: integer representation of string
  */
 int _atoi(char *str)
 {
-	int sign = 1;
-	unsigned int dig = 0, i;
+    int num = 0;
+    int sign = 1;
 
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		else if (str[i] >= '0' && str[i] <= '9')
-			dig = dig * 10 + (str[i] - '0');
-		else
-		{
-			printf("Error\n");
-			exit(98);
-		}
-	}
+    if (*str == '-')
+    {
+        sign = -1;
+        str++;
+    }
 
-	return (sign * dig);
+    while (*str)
+    {
+        if (*str < '0' || *str > '9')
+            return 0;
+        num = num * 10 + (*str - '0');
+        str++;
+    }
+
+    return num * sign;
 }
 
 /**
- * main - prints multiplication result, followed by newline
- * @argc: count of args
- * @argv: pointer to array of args
+ * print_num - print an unsigned long integer
+ * @num: the number to print
  *
- * Return: multiplication result
+ * Return: void
  */
-int main(int argc, char *argv[])
+void print_num(unsigned long int num)
 {
-	if (argc != 3)
-	{
-		printf("Error\n");
-		exit(98);
-	}
+    if (num >= 10)
+        print_num(num / 10);
+    putchar((num % 10) + '0');
+}
 
-	int num1 = _atoi(argv[1]);
-	int num2 = _atoi(argv[2]);
+/**
+ * main - multiply two positive numbers
+ * @argc: the number of command-line arguments
+ * @argv: an array of command-line argument strings
+ *
+ * Return: 0 on success, 98 on failure
+ */
+int main(int argc, char **argv)
+{
+    int num1, num2;
 
-	unsigned long int result = (unsigned long int)num1 * (unsigned long int)num2;
+    if (argc != 3)
+    {
+        printf("Error\n");
+        return (98);
+    }
 
-	print_num(result);
-	putchar('\n');
+    num1 = _atoi(argv[1]);
+    num2 = _atoi(argv[2]);
 
-	return (0);
+    if (num1 == 0 || num2 == 0)
+    {
+        printf("Error\n");
+        return (98);
+    }
+
+    print_num((unsigned long)num1 * (unsigned long)num2);
+    putchar('\n');
+
+    return (0);
 }
