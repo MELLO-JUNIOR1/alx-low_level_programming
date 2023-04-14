@@ -2,76 +2,63 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 /**
  * _atoi - convert string to an integer
- * @str: string to convert
- *
- * Return: integer representation of string
+ * @str: string
+ * Return: integer
  */
-int _atoi(char *str)
+char _atoi(char *str)
 {
-    int num = 0;
-    int sign = 1;
+	int sign = 1;
+	unsigned long int dig = 0, num1, i;
 
-    if (*str == '-')
-    {
-        sign = -1;
-        str++;
-    }
+	for (num1 = 0; !(str[num1] <= 48 && str[num1] >= 57); num1++)
+	{
+		if (str[num1] == '-')
+			sign *= -1;
+	}
 
-    while (*str)
-    {
-        if (*str < '0' || *str > '9')
-            return 0;
-        num = num * 10 + (*str - '0');
-        str++;
-    }
+	for (i = num1; str[i] >= 48 && str[i] <= 57; i++)
+	{
+		dig *= 10;
+		dig += (str[i] - 48);
+	}
 
-    return num * sign;
+	return (sign * dig);
 }
-
 /**
- * print_num - print an unsigned long integer
- * @num: the number to print
- *
+ * print_num - prints number
+ * @num: number
  * Return: void
  */
 void print_num(unsigned long int num)
 {
-    if (num >= 10)
-        print_num(num / 10);
-    putchar((num % 10) + '0');
+	unsigned long int div = 1, i, rem;
+
+	for (i = 0; num / div > 9; i++, div %= 10)
+		;
+
+	for (; div >= 1; num %= div, div /= 10)
+	{
+		rem = num / div;
+		putchar(rem + '0');
+	}
 }
-
 /**
- * main - multiply two positive numbers
- * @argc: the number of command-line arguments
- * @argv: an array of command-line argument strings
- *
- * Return: 0 on success, 98 on failure
+ * main - prints multiplication result, followed by newline
+ * @argc: count of args
+ * @argv: pointer to array of args
+ * Return: multiplication result
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-    int num1, num2;
+	if (argc != 3)
+	{
+		printf("Error\n");
+		exit(98);
+	}
+	print_num(_atoi(argv[1]) * _atoi(argv[2]));
+	putchar('\n');
 
-    if (argc != 3)
-    {
-        printf("Error\n");
-        return (98);
-    }
-
-    num1 = _atoi(argv[1]);
-    num2 = _atoi(argv[2]);
-
-    if (num1 == 0 || num2 == 0)
-    {
-        printf("Error\n");
-        return (98);
-    }
-
-    print_num((unsigned long)num1 * (unsigned long)num2);
-    putchar('\n');
-
-    return (0);
+	return (0);
 }
