@@ -4,7 +4,8 @@
  * free_dog - Function that frees memory
  * @d: Pointer
  * Return: void
- */void free_dog(dog_t *d)
+ */
+void free_dog(dog_t *d)
 {
 if (d)
 {
