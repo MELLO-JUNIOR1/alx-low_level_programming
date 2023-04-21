@@ -5,33 +5,36 @@
  * main - Entry function
  * @argc: number of arguments
  * @argv: array of arguments
- * Return: Return 0 (succes)
+ * Return: Return 0 (success)
  */
 int main(int argc, char *argv[])
 {
-int arg1, i;
-char *ptr = (char *)main;
+    int n, i;
+    char *p;
 
-if (argc != 2)
-{
-printf("Error\n");
-exit(1);
-}
+    if (argc != 2)
+    {
+        printf("Error\n");
+        exit(1);
+    }
 
-arg1 = atoi(argv[1]);
-if (arg1 < 0)
-{
-printf("Error\n");
-exit(2);
-}
+    n = atoi(argv[1]);
 
-for (i = 0; i < arg1; i++)
-{
-printf("%02hhx", *ptr++);
-if (arg1 != 0)
-printf("%s", " ");
-else
-printf("%s", "\n");
-}
-return (0);
+    if (n < 0)
+    {
+        printf("Error\n");
+        exit(2);
+    }
+
+    p = (char *) main;
+
+    for (i = 0; i < n; i++)
+    {
+        if (i != 0)
+            printf(" ");
+        printf("%02hhx", p[i]);
+    }
+    printf("\n");
+
+    return (0);
 }
