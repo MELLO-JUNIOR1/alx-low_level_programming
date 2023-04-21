@@ -9,32 +9,32 @@
  */
 int main(int argc, char *argv[])
 {
-    int n, i;
-    char *p;
+int n, i;
+char *p;
 
-    if (argc != 2)
-    {
-        printf("Error\n");
-        exit(1);
-    }
+if (argc != 2)
+{
+printf("Error\n");
+exit(1);
+}
 
-    n = atoi(argv[1]);
+n = atoi(argv[1]);
 
-    if (n < 0)
-    {
-        printf("Error\n");
-        exit(2);
-    }
+if (n < 0)
+{
+printf("Error\n");
+exit(2);
+}
 
-    p = (char *) main;
+p = (char *) main;
 
-    for (i = 0; i < n; i++)
-    {
-        if (i != 0)
-            printf(" ");
-        printf("%02hhx", p[i]);
-    }
-    printf("\n");
+for (i = 0; i < n; i++)
+{
+if (i != 0)
+printf(" ");
+printf("%02hhx", p[i]);
+}
+printf("\n");
 
-    return (0);
+return (0);
 }
