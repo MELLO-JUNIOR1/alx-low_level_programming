@@ -18,5 +18,5 @@ count++;
 
 
 
-return (n);
+return (count);
 }
