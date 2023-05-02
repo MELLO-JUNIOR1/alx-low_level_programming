@@ -1,29 +1,40 @@
 #include "lists.h"
+
 /**
- * print_listint_safe - Prints a listint_t list
- * @head: pointer to the head of head
- * Return: number of heads list || 98
+ * print_listint_safe - Function prints a list
+ * @head: pointer
+ * Return: Return n
  */
 size_t print_listint_safe(const listint_t *head)
 {
-size_t count = 0;
+int n = 0;
+const listint_t *print;
+const listint_t *not_node;
 
-if (!head)
+print = head;
+not_n = head;
+
+if (head == NULL)
 exit(98);
 
-while (head != NULL)
+while (not_n)
 {
-printf("[%p] %d\n", (void *)head, head->n);
-count++;
+printf("[%p] %d\n", (void *)print, print->n);
+n++;
 
-if (head->next >= head)
+if (not_n <= not_n->next)
 {
-head = head->next;
-printf("-> [%p] %d\n", (void *)head, head->n);
-break;
+printf("-> [%p] %d\n", (void *)not_n->next, not_n->next->n);
+			break;
 }
-head = head->next;
+print = print->next;
+not_n = not_n->next;
 }
 
-return (count);
+if (not_n)
+{
+exit(98);
+}
+
+return (n);
 }
