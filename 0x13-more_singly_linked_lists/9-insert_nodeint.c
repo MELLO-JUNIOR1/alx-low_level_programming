@@ -1,51 +1,42 @@
 #include "lists.h"
-
 /**
- * *insert_nodeint_at_index - Function adds node
- * @head: pointer
- * @idx: index
- * @n: value
- * Return: Return new || null
+ * *insert_nodeint_at_index - Inserts a new node at a given position
+ * @head: pointer to the pointer to the head
+ * @idx: index where the new node should be added
+ * @n: date of the new node
+ * Return: the address of the new node || NULL
  */
 listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 {
-listint_t *hd;
-listint_t *new;
-unsigned int i = 0;
-    
-if (head == NULL)
+listint_t *new_n = malloc(sizeof(listint_t));
+unsigned int count = 0;
+listint_t *current = *head;
+
+if (new_n == NULL)
 return (NULL);
 
-hd = *head;
+new_n->n = n;
 if (idx == 0)
 {
-new = malloc(sizeof(listint_t));
-        
-if (new == NULL)
-return (NULL);
-        
-new->n = n;
-new->next = hd;
-*head = new;
-return (new);
+new_n->next = *head;
+*head = new_n;
+return (new_n);
 }
 
-while (hd != NULL && i + 1 != idx)
+while (current != NULL && count < idx - 1)
 {
-hd = hd->next;
-i++;
+current = current->next;
+count++;
 }
 
-if (hd == NULL)
+if (current == NULL)
+{
+free(new_n);
 return (NULL);
+}
 
-new = malloc(sizeof(listint_t));
-if (new == NULL)
-return (NULL);
+new_n->next = current->next;
+current->next = new_n;
 
-new->n = n;
-new->next = hd->next;
-hd->next = new;
-
-return (new);
+return (new_n);
 }

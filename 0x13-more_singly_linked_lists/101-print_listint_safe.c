@@ -7,35 +7,33 @@
  */
 size_t print_listint_safe(const listint_t *head)
 {
-size_t n = 0;
-const listint_t *print, *not_n;
+int n = 0;
+const listint_t *p;
+const listint_t *not;
 
-print = head;
-not_n = head;
+p = head;
+not = head;
 
 if (head == NULL)
-{
 exit(98);
-}
 
 while (not_n)
 {
-printf("[%p] %d\n", (void *)print, print->n);
+printf("[%p] %d\n", (void *)p, p->n);
 n++;
 
-if (not_n <= not_n->next)
+if (not <= not->next)
 {
-printf("-> [%p] %d\n", (void *)not_n->next, not_n->next->n);
-return (n);
+printf("-> [%p] %d\n", (void *)not->next, not->next->n);
+break;
+}
+p = p->next;
+not = not->next;
 }
 
-print = print->next;
-not_n = not_n->next;
-
-if (not_n)
+if (not)
 {
-not_n = not_n->next;
-}
+exit(98);
 }
 
 return (n);
