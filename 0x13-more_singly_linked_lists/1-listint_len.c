@@ -6,9 +6,9 @@
  *
  * Return: Return s
  */
-unsigned int listint_len(const listint_t *h)
+size_t listint_len(const listint_t *h)
 {
-unsigned int s = 0;
+size_t s = 0;
 
 while (h)
 {
